@@ -1,0 +1,40 @@
+#!/bin/sh /etc/rc.common
+
+START=99
+
+# Configuration variables
+MOUNT_POINT="/nas-storage"  # Replace with the desired mount point
+DEVICE="/dev/sda1"  # Replace with the appropriate HDD device
+UUID="YOUR_UUID_HERE"  # Replace with the UUID of the device
+
+start() {
+    # Check if the mount point already exists
+    if [ ! -d "$MOUNT_POINT" ]; then
+        # Create the mount point folder if it doesn't exist
+        mkdir -p "$MOUNT_POINT"
+    fi
+
+    # Try mounting with UUID first
+    mount -t ntfs-3g UUID="$UUID" "$MOUNT_POINT" -o rw,lazytime,noatime,big_writes
+    
+    # Check if mounting with UUID was successful
+    if [ $? -eq 0 ]; then
+        echo "HDD successfully mounted at $MOUNT_POINT"
+    else
+        echo "Failed to mount with UUID. Trying with $DEVICE..."
+        
+        # Mount with $DEVICE as a fallback
+        mount -t ntfs-3g "$DEVICE" "$MOUNT_POINT" -o rw,lazytime,noatime,big_writes
+        
+        # Check if mounting with $DEVICE was successful
+        if [ $? -eq 0 ]; then
+            echo "HDD successfully mounted at $MOUNT_POINT (using $DEVICE)"
+        else
+            echo "Failed to mount at $MOUNT_POINT"
+        fi
+    fi
+}
+
+stop() {
+    umount "$MOUNT_POINT"
+}
