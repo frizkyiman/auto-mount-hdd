@@ -39,8 +39,8 @@ Step by step:
    chmod +x mount-hdd
    ```
 5. Update the configuration variables in the script:
+* Set the UUID variable to the UUID of your HDD partition. If you don't have the UUID, you can find it using the command blkid and replace YOUR_UUID with the actual UUID.
 * Set the DEVICE variable to the appropriate device of your HDD (e.g., /dev/sda1).
-* Set the UUID variable to the appropriate device of your HDD (e.g., 6239492739).
 * Set the MOUNT_POINT variable to the desired mount point for your HDD (e.g., /nas-storage).
    ```
    nano /etc/init.d/mount-hdd
@@ -59,6 +59,6 @@ Step by step:
    ```
    reboot
    ```
-9. After the reboot, the script will automatically mount the NTFS-formatted HDD at the specified mount point with the provided mount options.
+9. After the reboot, the script will automatically mount the NTFS-formatted HDD at the specified mount point with the provided mount options using the UUID. If the UUID is not available, it will fallback to using the fallback device /dev/sda1 for mounting.
 
 **Note:** Ensure that the HDD is properly connected and formatted with the NTFS filesystem.
