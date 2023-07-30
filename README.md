@@ -20,7 +20,7 @@ opkg install ntfs-3g
 
 How To:
 ```
-cd /etc/init.d/ && wget https://raw.githubusercontent.com/frizkyiman/Auto-Mount-HDD-Script-Openwrt/main/mount_hdd && chmod +x mount-hdd && /etc/init.d/mount-hdd enable
+cd /etc/init.d/ && wget https://raw.githubusercontent.com/frizkyiman/auto-mount-hdd/main/mount_hdd && chmod +x mount-hdd && /etc/init.d/mount-hdd enable
 ```
 
 Step by step:
