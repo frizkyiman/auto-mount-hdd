@@ -1,4 +1,4 @@
-# Auto-Mount-HDD-Script-Openwrt
+# Auto Mount HDD Script Openwrt
 Auto Mount HDD on Openwrt using NTFS-3g
 
 This script automates the process of mounting an NTFS-formatted external HDD on OpenWrt during system startup. It allows you to easily mount the HDD with custom options at a specified mount point.
