@@ -1,29 +1,21 @@
-#!/bin/sh /etc/rc.common
+#!/bin/sh
 # Created by Frizkyiman
 # Github https://github.com/frizkyiman/
-
-START=99
 
 # Configuration variables
 MOUNT_POINT="/nas-storage"  # Replace with the desired mount point
 DEVICE="/dev/sda1"  # Replace with the appropriate HDD device
 
-start() {
-    if [ ! -d "$MOUNT_POINT" ]; then
-        # Create the mount point folder if it doesn't exist
-        mkdir -p "$MOUNT_POINT"
-    fi
+if [ ! -d "$MOUNT_POINT" ]; then
+    # Create the mount point folder if it doesn't exist
+    mkdir -p "$MOUNT_POINT"
+fi
 
-        mount -t ntfs-3g "$DEVICE" "$MOUNT_POINT" -o rw,lazytime,noatime,big_writes
-        
-        if [ $? -eq 0 ]; then
-            echo "HDD successfully mounted at $MOUNT_POINT (using $DEVICE)"
-        else
-            echo "Failed to mount at $MOUNT_POINT"
-        fi
+    mount -t ntfs-3g "$DEVICE" "$MOUNT_POINT" -o rw,lazytime,noatime,big_writes
+ 
+    if [ $? -eq 0 ]; then
+        echo "HDD successfully mounted at $MOUNT_POINT (using $DEVICE)"
+    else
+        echo "Failed to mount at $MOUNT_POINT"
     fi
-}
-
-stop() {
-    umount "$MOUNT_POINT"
-}
+fi
