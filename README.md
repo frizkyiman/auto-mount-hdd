@@ -18,27 +18,11 @@ opkg update
 opkg install ntfs-3g
 ```
 
-How To:
+1. Install
 ```
-cd /etc/init.d/ && wget https://raw.githubusercontent.com/frizkyiman/auto-mount-hdd/main/mount_hdd && chmod +x mount-hdd && /etc/init.d/mount-hdd enable
+wget --no-check-certificate https://raw.githubusercontent.com/frizkyiman/auto-mount-hdd/main/mount_hdd -O /etc/init.d/mount-hdd && chmod +x /etc/init.d/mount-hdd
 ```
 
-Step by step:
-
-1. SSH into your OpenWrt device.
-2. Move to the init.d directory:
-   ```
-   cd /etc/init.d/
-   ```
-3. Download the script from GitHub:
-   ```
-   wget https://raw.githubusercontent.com/frizkyiman/Auto-Mount-HDD-Script-Openwrt/main/mount_hdd -O mount-hdd
-   ```
-4. Make the script executable:
-   ```
-   chmod +x mount-hdd
-   ```
-5. Update the configuration variables in the script:
 * Set the UUID variable to the UUID of your HDD partition. If you don't have the UUID, you can find it using the command blkid and replace YOUR_UUID with the actual UUID.
 * Set the DEVICE variable to the appropriate device of your HDD (e.g., /dev/sda1).
 * Set the MOUNT_POINT variable to the desired mount point for your HDD (e.g., /nas-storage).
@@ -47,11 +31,11 @@ Step by step:
    ```
   (save with ctrl+x then Y then Enter)
   
-6. Update the init script:
+2. Update the init script:
    ```
    /etc/init.d/mount-hdd enable
    ```
-7. You can Reboot your OpenWrt device or directly run the script:
+3. You can Reboot your OpenWrt device or directly run the script:
    ```
    /etc/init.d/mount-hdd start
    ```
@@ -59,6 +43,6 @@ Step by step:
    ```
    reboot
    ```
-9. After the reboot, the script will automatically mount the NTFS-formatted HDD at the specified mount point with the provided mount options using the UUID. If the UUID is not available, it will fallback to using the fallback device /dev/sda1 for mounting.
+4. After the reboot, the script will automatically mount the NTFS-formatted HDD at the specified mount point with the provided mount options using the UUID. If the UUID is not available, it will fallback to using the fallback device /dev/sda1 for mounting.
 
 **Note:** Ensure that the HDD is properly connected and formatted with the NTFS filesystem.
