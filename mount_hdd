@@ -12,8 +12,12 @@ fi
 DEVICE="$1"
 MOUNT_POINT="$2"
 
+if mount | grep "$DEVICE" > /dev/null; then
+    echo "Device $DEVICE is already mounted. Unmounting..."
+    umount "$DEVICE"
+fi
+
 if [ ! -d "$MOUNT_POINT" ]; then
-    # Create the mount point folder if it doesn't exist
     mkdir -p "$MOUNT_POINT"
 fi
 
