@@ -4,8 +4,8 @@
 
 # Configuration variables
 if [ "$#" -ne 2 ]; then
-    echo "Usage: $0 <DEVICE> <MOUNT_POINT>"
-    echo "eg. mount_hdd /dev/sda1 /nas-storage"
+    echo "Usage: mount_hdd <DEVICE> <MOUNT_POINT>"
+    echo "eg.    mount_hdd /dev/sda1 /nas-storage"
     exit 1
 fi
 
