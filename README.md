@@ -1,14 +1,15 @@
 # Auto Mount HDD Script Openwrt
-Auto Mount HDD on Openwrt using NTFS-3g
+Auto Mount HDD on Openwrt
 
-This script automates the process of mounting an NTFS-formatted external HDD on OpenWrt during system startup. It allows you to easily mount the HDD with custom options at a specified mount point.
+This script automates the process of mounting an NTFS-formatted external HDD on OpenWrt. It allows you to easily mount the HDD with custom options at a specified mount point.
 
 **Features:**
 
 * Checks if the mount point folder exists, and creates it if necessary.
+* Unmount device before mounting.
 * Mounts the NTFS-formatted HDD using the **'ntfs-3g'** driver.
-* Provides flexibility to customize the device, mount point, and mount options according to your requirements.
-* Suitable for automating the mounting process on OpenWrt systems using the init.d mechanism.
+* Provides flexibility to customize the device, mount point according to your requirements.
+
 
 **Prerequisites:**
 
@@ -18,31 +19,23 @@ opkg update
 opkg install ntfs-3g
 ```
 
-1. Install
+1. Install the script.
 ```
-wget --no-check-certificate https://raw.githubusercontent.com/frizkyiman/auto-mount-hdd/main/mount_hdd -O /etc/init.d/mount-hdd && chmod +x /etc/init.d/mount-hdd
+wget --no-check-certificate https://raw.githubusercontent.com/frizkyiman/auto-mount-hdd/main/mount_hdd -O /usr/bin/mount_hdd && chmod +x /usr/bin/mount_hdd
 ```
 
-* Set the UUID variable to the UUID of your HDD partition. If you don't have the UUID, you can find it using the command blkid and replace YOUR_UUID with the actual UUID.
-* Set the DEVICE variable to the appropriate device of your HDD (e.g., /dev/sda1).
-* Set the MOUNT_POINT variable to the desired mount point for your HDD (e.g., /nas-storage).
-   ```
-   nano /etc/init.d/mount-hdd
-   ```
-  (save with ctrl+x then Y then Enter)
-  
-2. Update the init script:
-   ```
-   /etc/init.d/mount-hdd enable
-   ```
-3. You can Reboot your OpenWrt device or directly run the script:
-   ```
-   /etc/init.d/mount-hdd start
-   ```
-   If it cannot mounted you should reboot or unmount the hdd first.
-   ```
-   reboot
-   ```
-4. After the reboot, the script will automatically mount the NTFS-formatted HDD at the specified mount point with the provided mount options using the UUID. If the UUID is not available, it will fallback to using the fallback device /dev/sda1 for mounting.
+2. Run the script on terminal.
+```
+mount_hdd <DEVICE> <MOUNT_POINT>
+```
+Dont forget to input your Device and Mount Point here, eg. mount_hdd /dev/sda1 /nas-storage"
+
+3. You can run this script at startup by adding this to /etc/rc.local
+```
+nano /etc/rc.local
+```
+```
+mount_hdd <DEVICE> <MOUNT_POINT>
+```
 
 **Note:** Ensure that the HDD is properly connected and formatted with the NTFS filesystem.
