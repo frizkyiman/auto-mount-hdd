@@ -3,8 +3,14 @@
 # Github https://github.com/frizkyiman/
 
 # Configuration variables
-MOUNT_POINT="/nas-storage"  # Replace with the desired mount point
-DEVICE="/dev/sda1"  # Replace with the appropriate HDD device
+if [ "$#" -ne 2 ]; then
+    echo "Usage: $0 <DEVICE> <MOUNT_POINT>"
+    echo "eg. mount_hdd /dev/sda1 /nas-storage"
+    exit 1
+fi
+
+DEVICE="$1"
+MOUNT_POINT="$2"
 
 if [ ! -d "$MOUNT_POINT" ]; then
     # Create the mount point folder if it doesn't exist
