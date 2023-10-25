@@ -28,4 +28,3 @@ fi
     else
         echo "Failed to mount at $MOUNT_POINT"
     fi
-fi
