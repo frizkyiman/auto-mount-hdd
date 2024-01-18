@@ -12,11 +12,6 @@ fi
 DEVICE="$1"
 MOUNT_POINT="$2"
 
-if mount | grep "$DEVICE" > /dev/null; then
-    echo "Device $DEVICE is already mounted. Unmounting..."
-    umount "$DEVICE"
-fi
-
 if [ ! -d "$MOUNT_POINT" ]; then
     mkdir -p "$MOUNT_POINT"
 fi
@@ -27,4 +22,6 @@ fi
         echo "HDD successfully mounted at $MOUNT_POINT (using $DEVICE)"
     else
         echo "Failed to mount at $MOUNT_POINT"
+        echo "Please unmount $DEVICE first if it mounted."
+        echo "Use this to unmount drive 'umount $DEVICE' on terminal"
     fi
